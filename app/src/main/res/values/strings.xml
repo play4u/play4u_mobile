@@ -2,8 +2,7 @@
     <string name="app_name">Play4You</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_select_user_type">SelectUserTypeActivity</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_listener">ListenerActivity</string>
     <string name="title_activity_music_jockey">MusicJockeyActivity</string>
+    <string name="title_activity_listener_settings">Settings</string>
 </resources>
