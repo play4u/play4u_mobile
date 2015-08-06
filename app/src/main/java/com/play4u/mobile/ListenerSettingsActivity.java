@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +14,7 @@ public class ListenerSettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listener_settings);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setDisplayShowTitleEnabled(true);
+        getActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override
@@ -32,7 +31,8 @@ public class ListenerSettingsActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch(item.getItemId()){
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                final Intent intent = new Intent(this, ListenerActivity.class);
+                startActivity(intent);
                 return true;
         }
 

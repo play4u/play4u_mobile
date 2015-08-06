@@ -28,7 +28,6 @@
             android:label="@string/title_activity_music_jockey" >
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name=".ListenerSettingsActivity"
             android:parentActivityName="com.play4u.mobile.ListenerActivity"
             android:label="@string/title_activity_listener_settings" >

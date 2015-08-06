@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,10 +6,25 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:theme="@style/Theme.AppCompat.Light"
+    android:theme="@android:style/Theme.Holo.Light"
+    android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal"
     tools:context="com.play4u.mobile.ListenerSettingsActivity">
 
-    <TextView android:text="hello_world" android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/first_name"
+        android:layout_marginBottom="10dp"
+        android:hint="First name"
+        android:inputType="text|textCapWords"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/email"
+        android:layout_marginBottom="10dp"
+        android:hint="Email address"
+        android:inputType="textEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
