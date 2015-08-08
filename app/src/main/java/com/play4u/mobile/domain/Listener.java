@@ -1,5 +1,6 @@
 package com.play4u.mobile.domain;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -10,18 +11,24 @@ import org.json.JSONStringer;
  * Created by ykeyser on 8/6/15.
  */
 public class Listener {
-    protected String firstName="",email="";
+    protected SharedPreferences prefs;
+    public static final String FIRST_NAME="fname";
+    public static final String EMAIL="email";
+
+    public Listener(final SharedPreferences prefs){
+        this.prefs=prefs;
+    }
 
     /*
     Setters
      */
     public Listener setFirstName(final String firstName){
-        this.firstName=firstName;
+        prefs.edit().putString(FIRST_NAME,firstName);
         return this;
     }
 
     public Listener setEmail(final String email){
-        this.email=email;
+        prefs.edit().putString(EMAIL,email);
         return this;
     }
 
@@ -29,11 +36,11 @@ public class Listener {
     Getters
      */
     public String getFirstName(){
-        return firstName;
+        return prefs.getString(FIRST_NAME,"");
     }
 
     public String getEmail(){
-        return email;
+        return prefs.getString(EMAIL,"");
     }
 
     /*

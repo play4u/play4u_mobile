@@ -1,5 +1,7 @@
 package com.play4u.mobile.services.adapters;
 
+import android.content.Context;
+
 import com.play4u.mobile.domain.Listener;
 
 
@@ -9,10 +11,12 @@ import com.play4u.mobile.domain.Listener;
  */
 public class ListenerSettingsService {
     protected final Listener listener;
+    protected final Context ctx;
 
 
-    public ListenerSettingsService(final Listener listener){
+    public ListenerSettingsService(final Context ctx, final Listener listener){
         this.listener=listener;
+        this.ctx=ctx;
     }
 
     /*
@@ -22,12 +26,12 @@ public class ListenerSettingsService {
         return listener;
     }
 
-    public String getFirstName(){
-        return null;
+    public String getFirstName() {
+       return "";
     }
 
     public String getEmail(){
-        return null;
+        return "";
     }
 
     /*
