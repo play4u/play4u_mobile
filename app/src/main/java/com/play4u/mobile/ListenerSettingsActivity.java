@@ -1,18 +1,22 @@
 package com.play4u.mobile;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.play4u.mobile.domain.Listener;
-import com.play4u.mobile.services.adapters.ListenerSettingsService;
+import com.play4u.mobile.facades.DirtyEditText;
+import com.play4u.mobile.services.adapters.ListenerSettingsUpdateService;
+import com.play4u.mobile.strategies.ActivityStrategy;
+import com.play4u.mobile.strategies.ListenerSettingsUpdateStrategy;
 
 public class ListenerSettingsActivity extends Activity {
-    protected ListenerSettingsService listenerSettings;
+    protected ListenerSettingsUpdateService listenerSettings;
     protected Listener listener;
+    protected DirtyEditText firstNameTextInput;
+    protected DirtyEditText emailTextInput;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +24,25 @@ public class ListenerSettingsActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
         this.listener=new Listener(getPreferences(MODE_PRIVATE));
-        this.listenerSettings=new ListenerSettingsService(getApplicationContext(),this.listener);
+        this.listenerSettings=new ListenerSettingsUpdateService(getApplicationContext(),this.listener);
+        firstNameTextInput=new DirtyEditText((EditText)findViewById(R.id.first_name));
+        emailTextInput=new DirtyEditText((EditText)findViewById(R.id.email));
+    }
+
+    public DirtyEditText getEmailTextInput(){
+        return emailTextInput;
+    }
+
+    public DirtyEditText getFirstNameTextInput(){
+        return firstNameTextInput;
+    }
+
+    public ListenerSettingsUpdateService getListenerSettings(){
+        return listenerSettings;
+    }
+
+    public Listener getListener(){
+        return listener;
     }
 
     @Override
@@ -30,16 +52,15 @@ public class ListenerSettingsActivity extends Activity {
         return true;
     }
 
-    @Override
+
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch(item.getItemId()){
             case android.R.id.home:
-                Log.i("ListenerSettings","Ping: "+this.listenerSettings.getFirstName());
-                final Intent intent = new Intent(this, ListenerActivity.class);
-                startActivity(intent);
+                final ActivityStrategy strategy=new ListenerSettingsUpdateStrategy(this);
+                strategy.doStrategy();
                 return true;
         }
 
