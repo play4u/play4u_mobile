@@ -46,7 +46,7 @@ public class DirtyEditText {
         return isDirty;
     }
 
-    public  String getText(){
+    public String toString(){
         return editText.getText().toString();
     }
 }
