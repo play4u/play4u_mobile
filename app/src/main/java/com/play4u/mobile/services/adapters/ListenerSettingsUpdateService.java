@@ -54,6 +54,20 @@ public class ListenerSettingsUpdateService {
         return this;
     }
 
+    public ListenerSettingsUpdateService setLongitude(final Float longitude){
+        listener.setLongitude(longitude);
+        shouldSend=true;
+        httpParams.add(new BasicNameValuePair("longitude", longitude.toString()));
+        return this;
+    }
+
+    public ListenerSettingsUpdateService setLatitude(final Float latitude){
+        listener.setLatitude(latitude);
+        shouldSend=true;
+        httpParams.add(new BasicNameValuePair("latitude", latitude.toString()));
+        return this;
+    }
+
     public JSONObject send() throws Exception{
         if(shouldSend) {
             final AbstractServiceTask task = new ListenerInfoUpdateServiceTask(ctx);
@@ -61,7 +75,9 @@ public class ListenerSettingsUpdateService {
             httpParams.toArray(nameValuePairsArray);
             task.execute(nameValuePairsArray);
             shouldSend=false;
-            return task.get();
+            final JSONObject respJSON=task.get();
+            task.close();
+            return respJSON;
         }
         else {
             throw new ServiceCommitException("No new data to send");

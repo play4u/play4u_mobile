@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.play4u.mobile.R;
-import com.play4u.mobile.services.adapters.tasks.facades.EmptyJSONObject;
+import com.play4u.mobile.facades.EmptyJSONObject;
 import com.play4u.mobile.services.adapters.tasks.facades.HttpResponseReader;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -31,10 +31,12 @@ public class ListenerInfoUpdateServiceTask extends AbstractServiceTask {
             final HttpPut httpPut=new HttpPut(ctx.getString(R.string.web_server_base_url)+route);
             httpPut.setEntity(new UrlEncodedFormEntity(Arrays.asList(params)));
             final HttpResponse response = httpClient.execute(httpPut);
-            return new JSONObject(new HttpResponseReader(response).read());
+            final String respStr = new HttpResponseReader(response).read();
+            Log.i("ListenerInfoUpdate", "Server resp: "+respStr);
+            return new JSONObject(respStr);
         }
         catch (Exception ex){
-            Log.e("PingTask", ExceptionUtils.getStackTrace(ex));
+            Log.e("ListenerInfoUpdate", ExceptionUtils.getStackTrace(ex));
             return EmptyJSONObject.singleton();
         }
     }

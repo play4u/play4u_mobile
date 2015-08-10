@@ -24,4 +24,8 @@ public abstract class AbstractServiceTask extends AsyncTask<NameValuePair, Void,
     public String getRoute(){
         return route;
     }
+
+    public void close(){
+        httpClient.close();
+    }
 }

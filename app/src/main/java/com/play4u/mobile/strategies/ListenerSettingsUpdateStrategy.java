@@ -1,11 +1,14 @@
 package com.play4u.mobile.strategies;
 
 import android.content.Intent;
+import android.location.Location;
 import android.util.Log;
 
+import com.google.android.gms.location.LocationServices;
 import com.play4u.mobile.ListenerActivity;
 import com.play4u.mobile.ListenerSettingsActivity;
 import com.play4u.mobile.services.adapters.exceptions.ServiceCommitException;
+import com.play4u.mobile.services.domain.GoogleApiClientSingleton;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -22,6 +25,7 @@ public class ListenerSettingsUpdateStrategy implements ActivityStrategy{
     public void doStrategy(){
         updateFirstName();
         updateEmail();
+        updateLocation();
         send();
         transitionToNextActivity();
     }
@@ -53,5 +57,13 @@ public class ListenerSettingsUpdateStrategy implements ActivityStrategy{
         if(activity.getFirstNameTextInput().isDirty()){
             activity.getListenerSettings().setFirstName(activity.getFirstNameTextInput().toString());
         }
+    }
+
+    protected void updateLocation(){
+        final Location location= LocationServices.FusedLocationApi.getLastLocation(
+                GoogleApiClientSingleton.singleton());
+
+        activity.getListenerSettings().setLatitude((float)location.getLatitude())
+                .setLongitude((float)location.getLatitude());
     }
 }

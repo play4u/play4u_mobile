@@ -1,4 +1,4 @@
-package com.play4u.mobile.services.adapters.tasks.facades;
+package com.play4u.mobile.facades;
 
 import android.util.Log;
 
@@ -18,7 +18,7 @@ public class EmptyJSONObject {
                 result = helper;
                 if (result == null) {
                     try {
-                        helper = result = new JSONObject("{}");
+                        helper = result = new JSONObject();
                     }
                     catch (Exception ex){
                         Log.e("EmptyJSONObject", ExceptionUtils.getStackTrace(ex));

@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 
 public class SelectUserTypeActivity extends Activity {
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_user_type_activity);

@@ -2,18 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.play4u.mobile" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <service
+            android:name=".services.PushNotificationService"
+            android:exported="false"/>
+
         <activity
             android:name=".LoadingActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,11 +40,16 @@
         </activity>
         <activity
             android:name=".ListenerSettingsActivity"
-            android:parentActivityName="com.play4u.mobile.ListenerActivity"
-            android:label="@string/title_activity_listener_settings" >
+            android:label="@string/title_activity_listener_settings"
+            android:parentActivityName=".ListenerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.play4u.mobile.ListenerActivity" />
         </activity>
+        <activity
+            android:name=".LoadingErrorActivity"
+            android:label="@string/title_activity_loading_error" >
+        </activity>
     </application>
+
 </manifest>
