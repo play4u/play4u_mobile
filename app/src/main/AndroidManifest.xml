@@ -13,9 +13,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
+        <!--
         <service
             android:name=".services.PushNotificationService"
             android:exported="false"/>
+            -->
 
         <activity
             android:name=".LoadingActivity"

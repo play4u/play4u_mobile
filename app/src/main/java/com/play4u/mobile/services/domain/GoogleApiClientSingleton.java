@@ -1,6 +1,6 @@
 package com.play4u.mobile.services.domain;
 
-import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -15,12 +15,14 @@ public class GoogleApiClientSingleton {
     protected static volatile GoogleApiClient helper;
     protected static final String LOG_TAG="GoogleApiClientSingle";
 
-    public static GoogleApiClient singleton(final Activity activity){
-        if(!(activity instanceof GoogleApiClient.ConnectionCallbacks)){
-            throw new IllegalArgumentException("Activity does not implement Google API connection-callbacks");
+    public static GoogleApiClient singleton(final Context context){
+        if(!(context instanceof GoogleApiClient.ConnectionCallbacks)){
+            throw new IllegalArgumentException("Context does not implement Google API connection-callbacks. " +
+                    "Type: "+context.getClass().getName());
         }
-        else if(!(activity instanceof GoogleApiClient.OnConnectionFailedListener)){
-            throw new IllegalArgumentException("Activity does not implement Google API on-connection-failed listener");
+        else if(!(context instanceof GoogleApiClient.OnConnectionFailedListener)){
+            throw new IllegalArgumentException("Context does not implement Google API on-connection-failed listener. " +
+                    "Type: "+context.getClass().getName());
         }
 
         GoogleApiClient result = helper;
@@ -30,9 +32,9 @@ public class GoogleApiClientSingleton {
 
                 if (result == null) {
                     try {
-                        helper = result = new GoogleApiClient.Builder(activity)
-                                .addConnectionCallbacks((GoogleApiClient.ConnectionCallbacks)activity)
-                                .addOnConnectionFailedListener((GoogleApiClient.OnConnectionFailedListener) activity)
+                        helper = result = new GoogleApiClient.Builder(context)
+                                .addConnectionCallbacks((GoogleApiClient.ConnectionCallbacks)context)
+                                .addOnConnectionFailedListener((GoogleApiClient.OnConnectionFailedListener) context)
                                 .addApi(LocationServices.API)
                                 .build();
                     }

@@ -29,4 +29,5 @@ dependencies {
     */
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'com.google.android.gms:play-services-location:7.5.0'
+    compile 'com.google.android.gms:play-services-maps:7.5.0'
 }

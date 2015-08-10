@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class LoadingErrorActivity extends Activity {
+    public static final String INTENT_EXCEPTION_KEY="exception";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

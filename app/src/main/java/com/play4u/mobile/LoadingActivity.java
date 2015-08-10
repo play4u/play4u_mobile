@@ -17,18 +17,15 @@ import com.play4u.mobile.domain.Listener;
 import com.play4u.mobile.domain.MusicJockey;
 import com.play4u.mobile.domain.User;
 import com.play4u.mobile.facades.BitMapRescaleFacade;
+import com.play4u.mobile.services.adapters.tasks.GoogleApiConnectTask;
 import com.play4u.mobile.services.domain.GoogleApiClientSingleton;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-public class LoadingActivity extends  Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class LoadingActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     protected final String LOG_TAG="LoadingActivity";
-    public static final int GOOGLE_API_CONNECTION_RETRIES=3;
-    public static final short GOOGLE_API_CONNECTION_TIMEOUT=3000; // secs
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +34,9 @@ public class LoadingActivity extends  Activity implements GoogleApiClient.Connec
         initializeUser();
     }
 
-
-
     public void onConnected(final Bundle bundle) {
+        Log.w(LOG_TAG, "Connected to Google API");
+
         final Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(
                 GoogleApiClientSingleton.singleton(this));
 
@@ -53,21 +50,22 @@ public class LoadingActivity extends  Activity implements GoogleApiClient.Connec
     }
 
     public void onConnectionFailed(final ConnectionResult connectionResult) {
+        Log.w(LOG_TAG, "Could not connect to Google API services. Error code: " + connectionResult.getErrorCode());
     }
 
     protected void initializeUser(){
         final String user_type=getPreferences(MODE_PRIVATE).getString(User.USER_TYPE_KEY, User.USER_TYPE);
 
-        if(StringUtils.equalsIgnoreCase(user_type, Listener.USER_TYPE_VALUE)){
+        if(StringUtils.equals(user_type, Listener.USER_TYPE_VALUE)){
             Listener.singleton(getPreferences(MODE_PRIVATE));
         }
-        else if(StringUtils.equalsIgnoreCase(user_type, MusicJockey.USER_TYPE_VALUE)){
+        else if(StringUtils.equals(user_type, MusicJockey.USER_TYPE_VALUE)){
             MusicJockey.singleton(getPreferences(MODE_PRIVATE));
         }else {
             User.singleton(getPreferences(MODE_PRIVATE));
         }
 
-        Log.i("LoadingActivity", "Detected user: " + User.singleton());
+        Log.i(LOG_TAG, "Detected user: " + User.singleton().getClass().getSimpleName());
     }
 
     protected void initializeLoadingBackground(){
@@ -78,19 +76,10 @@ public class LoadingActivity extends  Activity implements GoogleApiClient.Connec
                 new BitMapRescaleFacade(getWindowManager(), bitmap).rescaleImage()));
     }
 
-    protected void connectToGoogleApi() throws IOException{
-        int errorCode=ConnectionResult.INTERNAL_ERROR;
-
-        for(int attempt=1;attempt <= GOOGLE_API_CONNECTION_RETRIES && errorCode != ConnectionResult.SUCCESS; attempt++){
-            errorCode=GoogleApiClientSingleton
-                    .singleton()
-                    .blockingConnect(GOOGLE_API_CONNECTION_TIMEOUT, TimeUnit.SECONDS)
-                    .getErrorCode();
-        }
-
-        if(errorCode != ConnectionResult.SUCCESS){
-            throw new IOException("Connection to Google APIs failed. Error code: "+errorCode);
-        }
+    protected void connectToGoogleApi() throws Exception{
+        final GoogleApiConnectTask task=new GoogleApiConnectTask(this);
+        task.execute();
+        task.get();
     }
 
     public void onResume(){
@@ -99,14 +88,13 @@ public class LoadingActivity extends  Activity implements GoogleApiClient.Connec
         try {
             connectToGoogleApi();
         }
-        catch (IOException ex){
+        catch (Throwable ex){
             Log.e(LOG_TAG, ExceptionUtils.getStackTrace(ex));
             final Intent intent = new Intent(this, LoadingErrorActivity.class);
+            intent.putExtra(LoadingErrorActivity.INTENT_EXCEPTION_KEY,ex.getMessage());
             startActivity(intent);
             return;
         }
-
-
 
         if (User.singleton() instanceof Listener){
             Log.i(LOG_TAG, "Detected listener. Switching to listener activity...");
