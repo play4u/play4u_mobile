@@ -17,4 +17,5 @@ public abstract class AbstractServiceTask extends AsyncTask<NameValuePair, Void,
         this.ctx=ctx;
     }
     public void close(){}
+    public Context getContext(){return ctx;}
 }

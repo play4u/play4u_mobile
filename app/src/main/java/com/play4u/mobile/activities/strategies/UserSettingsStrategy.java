@@ -88,6 +88,6 @@ public class UserSettingsStrategy {
                 GoogleApiClientSingleton.singleton());
 
         getService().setLatitude((float) location.getLatitude())
-                .setLongitude((float)location.getLatitude());
+                .setLongitude((float)location.getLongitude());
     }
 }

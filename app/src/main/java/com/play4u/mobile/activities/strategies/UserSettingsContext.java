@@ -42,7 +42,7 @@ public class UserSettingsContext {
     }
 
     public void doStrategy(){
-        if(strategy instanceof UserSettingsUpdateStrategy) {
+        if(strategy instanceof UserSettingsStrategy) {
             strategy.doStrategy();
         }
     }

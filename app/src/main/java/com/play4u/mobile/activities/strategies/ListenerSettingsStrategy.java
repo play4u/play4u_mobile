@@ -22,7 +22,7 @@ public class ListenerSettingsStrategy extends UserSettingsStrategy {
         return  (ListenerSettingsActivity)super.getActivity();
     }
 
-    public void updateData(){
+    protected void updateData(){
         super.updateData();
         updateFirstName();
     }
@@ -33,7 +33,7 @@ public class ListenerSettingsStrategy extends UserSettingsStrategy {
 
     protected void updateFirstName() {
         if(getActivity().getFirstNameTextInput().isDirty()) {
-            getService().setFirstName(getActivity().getEmailTextInput().toString());
+            getService().setFirstName(getActivity().getFirstNameTextInput().toString());
         }
     }
 

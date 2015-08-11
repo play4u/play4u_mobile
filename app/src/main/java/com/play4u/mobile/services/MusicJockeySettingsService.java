@@ -16,21 +16,22 @@ import java.util.List;
  */
 public abstract class MusicJockeySettingsService extends UserSettingsService {
     protected final List<BasicNameValuePair> httpParams=new ArrayList<BasicNameValuePair>();
-    protected boolean shouldSend;
-    protected MusicJockey user;
 
     public MusicJockeySettingsService(final Context ctx, final MusicJockey user){
         super(ctx, user);
-        this.user=user;
+    }
+
+    public MusicJockey getUser(){
+        return (MusicJockey)super.getUser();
     }
 
     /*
     Setters
      */
     public MusicJockeySettingsService setStageName(final String stageName){
-        user.setStageName(stageName);
-        shouldSend=true;
-        httpParams.add(new BasicNameValuePair("stage_name", stageName));
+        getUser().setStageName(stageName);
+        setShouldSend(true);
+        addHttpNameValuePair("stage_name",stageName);
         return this;
     }
 }

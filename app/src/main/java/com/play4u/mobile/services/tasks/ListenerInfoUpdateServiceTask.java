@@ -11,6 +11,6 @@ public class ListenerInfoUpdateServiceTask extends UserInfoUpdateServiceTask imp
     }
 
     public String getRoute(){
-        return ROUTE;
+        return ROUTE+'/'+getUserId();
     }
 }

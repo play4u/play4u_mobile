@@ -29,7 +29,15 @@ public abstract class SendTask extends AbstractServiceTask  {
         httpClient.close();
     }
 
+    /*
+    Provides a route, e.g. /listeners or /listeners/1, to an HTTP request
+     */
     public abstract String getRoute();
+
+    /*
+    Template-method pattern.
+    Create an HTTP request using the route returned by getRoute.
+     */
     public abstract HttpUriRequest createHttpUriRequest(final NameValuePair... params) throws Exception;
 
     public JSONObject doInBackground(final NameValuePair... params){

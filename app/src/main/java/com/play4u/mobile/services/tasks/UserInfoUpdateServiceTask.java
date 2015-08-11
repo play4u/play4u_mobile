@@ -30,8 +30,12 @@ public abstract class UserInfoUpdateServiceTask extends SendTask {
         this.userId=userId;
     }
 
+    public Integer getUserId(){
+        return userId;
+    }
+
     public HttpUriRequest createHttpUriRequest(final NameValuePair... params) throws Exception{
-        final String uri=ctx.getString(R.string.web_server_base_url)+getRoute()+'/'+userId;
+        final String uri=getContext().getString(R.string.web_server_base_url)+ getRoute();
         Log.i(LOG_TAG,"[ListenerInfoUpdateServiceTask] URI: "+uri);
         Log.i(LOG_TAG, "[ListenerInfoUpdateServiceTask] Params: "+Arrays.asList(params));
         final HttpPut httpPut=new HttpPut(uri);

@@ -16,21 +16,25 @@ import java.util.List;
  */
 public abstract class ListenerSettingsService extends UserSettingsService {
     protected final List<BasicNameValuePair> httpParams=new ArrayList<BasicNameValuePair>();
-    protected boolean shouldSend;
-    protected Listener listener;
 
     public ListenerSettingsService(final Context ctx, final Listener listener){
         super(ctx,listener);
-        this.listener=listener;
+    }
+
+    /*
+    Getters
+     */
+    public Listener getUser(){
+        return (Listener)super.getUser();
     }
 
     /*
     Setters
      */
     public ListenerSettingsService setFirstName(final String firstName){
-        listener.setFirstName(firstName);
-        shouldSend=true;
-        httpParams.add(new BasicNameValuePair("first_name", firstName));
+        getUser().setFirstName(firstName);
+        setShouldSend(true);
+        addHttpNameValuePair("first_name", firstName);
         return this;
     }
 }

@@ -17,6 +17,6 @@ public class MusicJockeySettingsCreateService extends MusicJockeySettingsService
    }
 
     public AbstractServiceTask createInfoServiceTask(){
-        return new MusicJockeyInfoCreateServiceTask(ctx);
+        return new MusicJockeyInfoCreateServiceTask(getContext());
     }
 }

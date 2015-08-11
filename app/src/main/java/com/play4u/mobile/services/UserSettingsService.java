@@ -19,10 +19,10 @@ import java.util.List;
  * Created by ykeyser on 8/6/15.
  */
 public abstract class UserSettingsService {
-    protected final User user;
-    protected final Context ctx;
-    protected final List<BasicNameValuePair> httpParams=new ArrayList<BasicNameValuePair>();
-    protected boolean shouldSend;
+    private final User user;
+    private final Context ctx;
+    private final List<BasicNameValuePair> httpParams=new ArrayList<BasicNameValuePair>();
+    private boolean shouldSend;
 
     public UserSettingsService(final Context ctx, final User user){
         this.user=user;
@@ -43,24 +43,34 @@ public abstract class UserSettingsService {
     /*
     Setters
      */
+    protected BasicNameValuePair addHttpNameValuePair(final String name, final String value){
+        final BasicNameValuePair nameValuePair=new BasicNameValuePair(name, value);
+        httpParams.add(nameValuePair);
+        return nameValuePair;
+    }
+
+    protected void setShouldSend(final boolean shouldSend){
+        this.shouldSend=shouldSend;
+    }
+
     public UserSettingsService setEmail(final String email){
         getUser().setEmail(email);
         shouldSend=true;
-        httpParams.add(new BasicNameValuePair("email", email));
+        addHttpNameValuePair("email", email);
         return this;
     }
 
     public UserSettingsService setLongitude(final Float longitude){
         getUser().setLongitude(longitude);
         shouldSend=true;
-        httpParams.add(new BasicNameValuePair("longitude", longitude.toString()));
+        addHttpNameValuePair("longitude", longitude.toString());
         return this;
     }
 
     public UserSettingsService setLatitude(final Float latitude){
         getUser().setLatitude(latitude);
         shouldSend=true;
-        httpParams.add(new BasicNameValuePair("latitude", latitude.toString()));
+        addHttpNameValuePair("latitude", latitude.toString());
         return this;
     }
 
@@ -73,6 +83,7 @@ public abstract class UserSettingsService {
             httpParams.toArray(nameValuePairsArray);
             task.execute(nameValuePairsArray);
             shouldSend=false;
+            httpParams.clear();
             final JSONObject respJSON=task.get();
             task.close();
             return respJSON;

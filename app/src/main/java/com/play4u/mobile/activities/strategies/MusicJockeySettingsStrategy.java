@@ -18,6 +18,25 @@ public class MusicJockeySettingsStrategy extends UserSettingsStrategy {
         super.setService(service);
     }
 
+    public MusicJockeySettingsActivity getActivity(){
+        return  (MusicJockeySettingsActivity)super.getActivity();
+    }
+
+    protected MusicJockeySettingsService getService(){
+        return (MusicJockeySettingsService)super.getService();
+    }
+
+    protected void updateData(){
+        super.updateData();
+        updateStageName();
+    }
+
+    protected void updateStageName() {
+        if(getActivity().getStageNameTextInput().isDirty()) {
+            getService().setStageName(getActivity().getStageNameTextInput().toString());
+        }
+    }
+
     public void handleServiceResponse(final JSONObject jsonObj){
         if(jsonObj == null){
             throw new IllegalArgumentException("JSON response object is blank");

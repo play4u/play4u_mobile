@@ -24,12 +24,10 @@ public class DirtyEditText {
                 textBefore=s.toString();
             }
 
-
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 countAfter=count;
                 textAfter=s.toString();
             }
-
 
             public void afterTextChanged(Editable s) {
                 if(countBefore!=countAfter || !StringUtils.equalsIgnoreCase(textBefore,textAfter)){

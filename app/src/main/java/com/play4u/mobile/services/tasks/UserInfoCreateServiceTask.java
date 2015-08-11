@@ -17,14 +17,12 @@ import java.util.Arrays;
  */
 public abstract class UserInfoCreateServiceTask extends SendTask  {
     protected static final String LOG_TAG="UserInfoCreateTask";
-    protected Context ctx;
-
     public UserInfoCreateServiceTask(final Context ctx) {
         super(ctx);
     }
 
     public HttpUriRequest createHttpUriRequest(final NameValuePair... params) throws Exception{
-        final String uri=ctx.getString(R.string.web_server_base_url)+getRoute();
+        final String uri=getContext().getString(R.string.web_server_base_url)+ getRoute();
         Log.i(LOG_TAG, "[UserInfoCreateServiceTask] URI: " + uri);
         Log.i(LOG_TAG, "[UserInfoCreateServiceTask] Params: "+Arrays.asList(params));
         final HttpPost httpPost=new HttpPost(uri);

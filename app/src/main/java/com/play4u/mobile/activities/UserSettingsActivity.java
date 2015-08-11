@@ -13,7 +13,6 @@ import com.play4u.mobile.domain.User;
 import com.play4u.mobile.util.DirtyEditText;
 
 public abstract class UserSettingsActivity extends Activity {
-    protected DirtyEditText stageNameTextInput;
     protected DirtyEditText emailTextInput;
     protected final UserSettingsContext userSettingsContext = UserSettingsContext.singleton();
 
@@ -22,7 +21,6 @@ public abstract class UserSettingsActivity extends Activity {
         setContentView(R.layout.activity_listener_settings);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
-        stageNameTextInput=new DirtyEditText((EditText)findViewById(R.id.stage_name));
         emailTextInput=new DirtyEditText((EditText)findViewById(R.id.email));
     }
 
