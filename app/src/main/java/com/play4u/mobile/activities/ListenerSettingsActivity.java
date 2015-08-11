@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.play4u.mobile.R;
-import com.play4u.mobile.activities.strategies.ListenerSettingsCreateStrategy;
-import com.play4u.mobile.activities.strategies.ListenerSettingsUpdateStrategy;
+import com.play4u.mobile.activities.strategies.ListenerSettingsStrategy;
 import com.play4u.mobile.activities.strategies.UserSettingsStrategy;
 import com.play4u.mobile.domain.Listener;
 import com.play4u.mobile.services.ListenerSettingsCreateService;
@@ -25,9 +24,9 @@ public class ListenerSettingsActivity extends UserSettingsActivity {
     }
 
     public UserSettingsStrategy createStrategy(){
-        return new ListenerSettingsCreateStrategy(this,new ListenerSettingsCreateService(this, Listener.singleton()));
+        return new ListenerSettingsStrategy(this,new ListenerSettingsCreateService(this, Listener.singleton()));
     }
     public UserSettingsStrategy updateStrategy(){
-        return new ListenerSettingsUpdateStrategy(this,new ListenerSettingsUpdateService(this,Listener.singleton()));
+        return new ListenerSettingsStrategy(this,new ListenerSettingsUpdateService(this,Listener.singleton()));
     }
 }

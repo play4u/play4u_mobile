@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.play4u.mobile.R;
-import com.play4u.mobile.activities.strategies.MusicJockeySettingsCreateStrategy;
-import com.play4u.mobile.activities.strategies.MusicJockeySettingsUpdateStrategy;
+import com.play4u.mobile.activities.strategies.MusicJockeySettingsStrategy;
 import com.play4u.mobile.activities.strategies.UserSettingsStrategy;
 import com.play4u.mobile.domain.MusicJockey;
 import com.play4u.mobile.services.MusicJockeySettingsCreateService;
@@ -26,10 +25,10 @@ public class MusicJockeySettingsActivity extends UserSettingsActivity {
     }
 
     public UserSettingsStrategy createStrategy(){
-        return new MusicJockeySettingsCreateStrategy(this,new MusicJockeySettingsCreateService(this,MusicJockey.singleton()));
+        return new MusicJockeySettingsStrategy(this,new MusicJockeySettingsCreateService(this,MusicJockey.singleton()));
     }
 
     public UserSettingsStrategy updateStrategy(){
-        return new MusicJockeySettingsUpdateStrategy(this,new MusicJockeySettingsUpdateService(this, MusicJockey.singleton()));
+        return new MusicJockeySettingsStrategy(this,new MusicJockeySettingsUpdateService(this, MusicJockey.singleton()));
     }
 }

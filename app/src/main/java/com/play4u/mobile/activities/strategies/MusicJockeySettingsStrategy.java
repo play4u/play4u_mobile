@@ -10,10 +10,10 @@ import org.json.JSONObject;
 /**
  * Created by ykeyser on 8/10/15.
  */
-public class MusicJockeySettingsCreateStrategy extends UserSettingsCreateStrategy{
+public class MusicJockeySettingsStrategy extends UserSettingsStrategy {
     protected static final String LOG_TAG="ListenerSettingsCreate";
 
-    public MusicJockeySettingsCreateStrategy(final MusicJockeySettingsActivity activity, final MusicJockeySettingsService service){
+    public MusicJockeySettingsStrategy(final MusicJockeySettingsActivity activity, final MusicJockeySettingsService service){
         super(activity);
         super.setService(service);
     }
