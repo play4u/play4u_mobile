@@ -22,10 +22,6 @@ public class MusicJockeySettingsActivity extends UserSettingsActivity {
         stageNameTextInput=new DirtyEditText((EditText)findViewById(R.id.stage_name));
     }
 
-    public DirtyEditText getEmailTextInput(){
-        return emailTextInput;
-    }
-
     public DirtyEditText getStageNameTextInput(){
         return stageNameTextInput;
     }

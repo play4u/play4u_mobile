@@ -1,7 +1,6 @@
 package com.play4u.mobile.activities;
 
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.EditText;
 
 import com.play4u.mobile.R;
@@ -24,13 +23,6 @@ public class ListenerSettingsActivity extends UserSettingsActivity {
 
     public DirtyEditText getFirstNameTextInput(){
         return firstNameTextInput;
-    }
-
-
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_listener_settings, menu);
-        return true;
     }
 
     public UserSettingsService createService(){

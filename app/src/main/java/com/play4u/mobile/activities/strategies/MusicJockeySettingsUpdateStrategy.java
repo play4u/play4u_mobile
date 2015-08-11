@@ -4,7 +4,7 @@ import android.content.Intent;
 
 import com.play4u.mobile.activities.MusicJockeyActivity;
 import com.play4u.mobile.activities.MusicJockeySettingsActivity;
-import com.play4u.mobile.services.ListenerSettingsService;
+import com.play4u.mobile.services.MusicJockeySettingsService;
 
 import org.json.JSONObject;
 
@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * Created by ykeyser on 8/10/15.
  */
 public class MusicJockeySettingsUpdateStrategy extends UserSettingsUpdateStrategy {
-    protected ListenerSettingsService service;
+    protected MusicJockeySettingsService service;
     protected static final String LOG_TAG="MusicJockeySettings";
     protected MusicJockeySettingsActivity activity;
 
@@ -38,7 +38,7 @@ public class MusicJockeySettingsUpdateStrategy extends UserSettingsUpdateStrateg
 
     protected void updateStageName(){
         if(activity.getStageNameTextInput().isDirty()){
-            service.setFirstName(activity.getStageNameTextInput().toString());
+            service.setStageName(activity.getStageNameTextInput().toString());
         }
     }
 }

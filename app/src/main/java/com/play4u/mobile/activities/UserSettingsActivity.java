@@ -34,16 +34,6 @@ public abstract class UserSettingsActivity extends Activity {
     public DirtyEditText getEmailTextInput(){
         return emailTextInput;
     }
-
-
-    public UserSettingsService getUserSettingsUpdateService(){
-        return userSettingsUpdateService;
-    }
-
-    public UserSettingsService getUserSettingsCreateService(){
-        return userSettingsCreateService;
-    }
-
     public User getUser(){
         return User.singleton();
     }

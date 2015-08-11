@@ -19,12 +19,12 @@ import org.json.JSONObject;
  * Created by ykeyser on 8/10/15.
  */
 public abstract class UserSettingsCreateStrategy extends UserSettingsStrategy {
-    protected UserSettingsService service;
+
     protected static final String LOG_TAG="ListenerSettings";
 
     public UserSettingsCreateStrategy(final UserSettingsActivity activity){
         super(activity);
-        this.service=createService();
+        setService(createService());
     }
 
     public abstract UserSettingsService createService();
@@ -45,13 +45,13 @@ public abstract class UserSettingsCreateStrategy extends UserSettingsStrategy {
     }
 
     protected void transitionToNextActivity(){
-        final Intent intent = new Intent(activity, ListenerActivity.class);
-        activity.startActivity(intent);
+        final Intent intent = new Intent(getActivity(), ListenerActivity.class);
+        getActivity().startActivity(intent);
     }
 
     protected JSONObject send(){
         try {
-            return service.send();
+            return getService().send();
         }
         catch (ServiceCommitException ex){
             Log.w(LOG_TAG, ExceptionUtils.getStackTrace(ex));
@@ -64,8 +64,8 @@ public abstract class UserSettingsCreateStrategy extends UserSettingsStrategy {
     }
 
     protected void updateEmail() {
-        if(activity.getEmailTextInput().isDirty()) {
-            service.setEmail(activity.getEmailTextInput().toString());
+        if(getActivity().getEmailTextInput().isDirty()) {
+            getService().setEmail(getActivity().getEmailTextInput().toString());
         }
     }
 
@@ -74,7 +74,7 @@ public abstract class UserSettingsCreateStrategy extends UserSettingsStrategy {
         final Location location= LocationServices.FusedLocationApi.getLastLocation(
                 GoogleApiClientSingleton.singleton());
 
-        service.setLatitude((float) location.getLatitude())
+        getService().setLatitude((float) location.getLatitude())
                 .setLongitude((float)location.getLatitude());
     }
 }

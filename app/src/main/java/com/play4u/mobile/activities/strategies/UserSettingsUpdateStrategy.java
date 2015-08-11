@@ -24,7 +24,7 @@ public abstract class UserSettingsUpdateStrategy extends UserSettingsStrategy {
 
     public UserSettingsUpdateStrategy(final UserSettingsActivity activity){
         super(activity);
-        this.service=activity.createService();
+        setService(activity.updateService());
     }
 
     public void handleServiceResponse(final JSONObject jsonObj){
@@ -43,27 +43,27 @@ public abstract class UserSettingsUpdateStrategy extends UserSettingsStrategy {
     }
 
     protected void transitionToNextActivity(){
-        final Intent intent = new Intent(activity, ListenerActivity.class);
-        activity.startActivity(intent);
+        final Intent intent = new Intent(getActivity(), ListenerActivity.class);
+        getActivity().startActivity(intent);
     }
 
     protected JSONObject send(){
         try {
-            return service.send();
+            return getService().send();
         }
         catch (ServiceCommitException ex){
             Log.w(LOG_TAG, ExceptionUtils.getStackTrace(ex));
             return EmptyJSONObject.singleton();
         }
         catch (Throwable ex){
-            Log.e("ListenerSettings", ExceptionUtils.getStackTrace(ex));
+            Log.e(LOG_TAG, ExceptionUtils.getStackTrace(ex));
             return EmptyJSONObject.singleton();
         }
     }
 
     protected void updateEmail() {
-        if(activity.getEmailTextInput().isDirty()) {
-            service.setEmail(activity.getEmailTextInput().toString());
+        if(getActivity().getEmailTextInput().isDirty()) {
+            getService().setEmail(getActivity().getEmailTextInput().toString());
         }
     }
 
@@ -72,7 +72,7 @@ public abstract class UserSettingsUpdateStrategy extends UserSettingsStrategy {
         final Location location= LocationServices.FusedLocationApi.getLastLocation(
                 GoogleApiClientSingleton.singleton());
 
-        service.setLatitude((float) location.getLatitude())
+        getService().setLatitude((float) location.getLatitude())
                 .setLongitude((float)location.getLatitude());
     }
 }
