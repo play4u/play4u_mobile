@@ -3,7 +3,7 @@ package com.play4u.mobile.activities.strategies;
 import android.util.Log;
 
 import com.play4u.mobile.activities.ListenerSettingsActivity;
-import com.play4u.mobile.services.ListenerSettingsCreateService;
+import com.play4u.mobile.services.ListenerSettingsService;
 
 import org.json.JSONObject;
 
@@ -13,12 +13,28 @@ import org.json.JSONObject;
 public class ListenerSettingsCreateStrategy extends UserSettingsCreateStrategy{
     protected static final String LOG_TAG="ListenerSettingsCreate";
 
-    public ListenerSettingsCreateStrategy(final ListenerSettingsActivity activity){
+    public ListenerSettingsCreateStrategy(final ListenerSettingsActivity activity, final ListenerSettingsService service){
         super(activity);
+        this.setService(service);
     }
 
-    public ListenerSettingsCreateService createService(){
-        return (ListenerSettingsCreateService)getActivity().createService();
+    public ListenerSettingsActivity getActivity(){
+        return  (ListenerSettingsActivity)super.getActivity();
+    }
+
+    public void updateData(){
+        super.updateData();
+        updateFirstName();
+    }
+
+    protected ListenerSettingsService getService(){
+        return (ListenerSettingsService)super.getService();
+    }
+
+    protected void updateFirstName() {
+        if(getActivity().getFirstNameTextInput().isDirty()) {
+            getService().setFirstName(getActivity().getEmailTextInput().toString());
+        }
     }
 
     public void handleServiceResponse(final JSONObject jsonObj){

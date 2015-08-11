@@ -10,20 +10,15 @@ import com.play4u.mobile.R;
 import com.play4u.mobile.activities.strategies.UserSettingsContext;
 import com.play4u.mobile.activities.strategies.UserSettingsStrategy;
 import com.play4u.mobile.domain.User;
-import com.play4u.mobile.services.UserSettingsService;
 import com.play4u.mobile.util.DirtyEditText;
 
 public abstract class UserSettingsActivity extends Activity {
-    protected UserSettingsService userSettingsUpdateService;
-    protected UserSettingsService userSettingsCreateService;
     protected DirtyEditText stageNameTextInput;
     protected DirtyEditText emailTextInput;
     protected final UserSettingsContext userSettingsContext = UserSettingsContext.singleton();
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.userSettingsUpdateService=updateService();
-        this.userSettingsCreateService=createService();
         setContentView(R.layout.activity_listener_settings);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
@@ -46,8 +41,6 @@ public abstract class UserSettingsActivity extends Activity {
 
     public abstract UserSettingsStrategy createStrategy();
     public abstract UserSettingsStrategy updateStrategy();
-    public abstract UserSettingsService createService();
-    public abstract UserSettingsService updateService();
 
     public boolean onOptionsItemSelected(final MenuItem item) {
         // Handle action bar item clicks here. The action bar will

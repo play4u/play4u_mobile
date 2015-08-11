@@ -16,9 +16,10 @@ public class MusicJockeySettingsUpdateStrategy extends UserSettingsUpdateStrateg
     protected static final String LOG_TAG="MusicJockeySettings";
     protected MusicJockeySettingsActivity activity;
 
-    public MusicJockeySettingsUpdateStrategy(final MusicJockeySettingsActivity activity){
+    public MusicJockeySettingsUpdateStrategy(final MusicJockeySettingsActivity activity, final MusicJockeySettingsService service){
         super(activity);
         this.activity=activity;
+        super.setService(service);
     }
 
     public void handleServiceResponse(final JSONObject jsonObj){

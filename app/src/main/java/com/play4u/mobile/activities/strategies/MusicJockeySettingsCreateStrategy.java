@@ -13,12 +13,9 @@ import org.json.JSONObject;
 public class MusicJockeySettingsCreateStrategy extends UserSettingsCreateStrategy{
     protected static final String LOG_TAG="ListenerSettingsCreate";
 
-    public MusicJockeySettingsCreateStrategy(final MusicJockeySettingsActivity activity){
+    public MusicJockeySettingsCreateStrategy(final MusicJockeySettingsActivity activity, final MusicJockeySettingsService service){
         super(activity);
-    }
-
-    public MusicJockeySettingsService createService(){
-        return (MusicJockeySettingsService)getActivity().createService();
+        super.setService(service);
     }
 
     public void handleServiceResponse(final JSONObject jsonObj){

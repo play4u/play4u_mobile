@@ -21,7 +21,7 @@ public class SelectUserTypeActivity extends Activity {
         Log.i("SelectUserTypeActivity", "Selected music jockey");
         User.singleton().destroy();
         MusicJockey.singleton(getPreferences(MODE_PRIVATE));
-        final Intent intent=new Intent(this,MusicJockeyActivity.class);
+        final Intent intent=new Intent(this,MusicJockeySettingsActivity.class);
         startActivity(intent);
     }
 

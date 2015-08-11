@@ -7,7 +7,6 @@ import android.util.Log;
 import com.google.android.gms.location.LocationServices;
 import com.play4u.mobile.activities.ListenerActivity;
 import com.play4u.mobile.activities.UserSettingsActivity;
-import com.play4u.mobile.services.UserSettingsService;
 import com.play4u.mobile.services.exceptions.ServiceCommitException;
 import com.play4u.mobile.util.EmptyJSONObject;
 import com.play4u.mobile.util.GoogleApiClientSingleton;
@@ -24,10 +23,7 @@ public abstract class UserSettingsCreateStrategy extends UserSettingsStrategy {
 
     public UserSettingsCreateStrategy(final UserSettingsActivity activity){
         super(activity);
-        setService(createService());
     }
-
-    public abstract UserSettingsService createService();
 
     public void handleServiceResponse(final JSONObject jsonObj){
         return;

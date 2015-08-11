@@ -10,7 +10,6 @@ import com.play4u.mobile.activities.strategies.UserSettingsStrategy;
 import com.play4u.mobile.domain.Listener;
 import com.play4u.mobile.services.ListenerSettingsCreateService;
 import com.play4u.mobile.services.ListenerSettingsUpdateService;
-import com.play4u.mobile.services.UserSettingsService;
 import com.play4u.mobile.util.DirtyEditText;
 
 public class ListenerSettingsActivity extends UserSettingsActivity {
@@ -25,18 +24,10 @@ public class ListenerSettingsActivity extends UserSettingsActivity {
         return firstNameTextInput;
     }
 
-    public UserSettingsService createService(){
-        return new ListenerSettingsCreateService(this, Listener.singleton());
-    }
-
-    public UserSettingsService updateService(){
-        return new ListenerSettingsUpdateService(this,Listener.singleton());
-    }
-
     public UserSettingsStrategy createStrategy(){
-        return new ListenerSettingsCreateStrategy(this);
+        return new ListenerSettingsCreateStrategy(this,new ListenerSettingsCreateService(this, Listener.singleton()));
     }
     public UserSettingsStrategy updateStrategy(){
-        return new ListenerSettingsUpdateStrategy(this);
+        return new ListenerSettingsUpdateStrategy(this,new ListenerSettingsUpdateService(this,Listener.singleton()));
     }
 }

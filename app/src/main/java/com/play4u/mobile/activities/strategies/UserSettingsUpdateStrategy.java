@@ -24,7 +24,6 @@ public abstract class UserSettingsUpdateStrategy extends UserSettingsStrategy {
 
     public UserSettingsUpdateStrategy(final UserSettingsActivity activity){
         super(activity);
-        setService(activity.updateService());
     }
 
     public void handleServiceResponse(final JSONObject jsonObj){

@@ -10,7 +10,6 @@ import com.play4u.mobile.activities.strategies.UserSettingsStrategy;
 import com.play4u.mobile.domain.MusicJockey;
 import com.play4u.mobile.services.MusicJockeySettingsCreateService;
 import com.play4u.mobile.services.MusicJockeySettingsUpdateService;
-import com.play4u.mobile.services.UserSettingsService;
 import com.play4u.mobile.util.DirtyEditText;
 
 public class MusicJockeySettingsActivity extends UserSettingsActivity {
@@ -26,20 +25,11 @@ public class MusicJockeySettingsActivity extends UserSettingsActivity {
         return stageNameTextInput;
     }
 
-
-    public UserSettingsService createService(){
-        return new MusicJockeySettingsCreateService(this,MusicJockey.singleton());
-    }
-
-    public UserSettingsService updateService(){
-        return new MusicJockeySettingsUpdateService(this, MusicJockey.singleton());
-    }
-
     public UserSettingsStrategy createStrategy(){
-        return new MusicJockeySettingsCreateStrategy(this);
+        return new MusicJockeySettingsCreateStrategy(this,new MusicJockeySettingsCreateService(this,MusicJockey.singleton()));
     }
 
     public UserSettingsStrategy updateStrategy(){
-        return new MusicJockeySettingsUpdateStrategy(this);
+        return new MusicJockeySettingsUpdateStrategy(this,new MusicJockeySettingsUpdateService(this, MusicJockey.singleton()));
     }
 }
