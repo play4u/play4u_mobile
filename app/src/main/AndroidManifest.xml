@@ -21,7 +21,7 @@
             -->
 
         <activity
-            android:name=".LoadingActivity"
+            android:name=".activities.LoadingActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,27 +30,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SelectUserTypeActivity"
+            android:name=".activities.SelectUserTypeActivity"
             android:label="@string/title_activity_select_user_type" >
         </activity>
         <activity
-            android:name=".ListenerActivity"
+            android:name=".activities.ListenerActivity"
             android:label="@string/title_activity_listener" >
         </activity>
         <activity
-            android:name=".MusicJockeyActivity"
+            android:name=".activities.MusicJockeyActivity"
             android:label="@string/title_activity_music_jockey" >
         </activity>
         <activity
-            android:name=".ListenerSettingsActivity"
+            android:name=".activities.ListenerSettingsActivity"
             android:label="@string/title_activity_listener_settings"
-            android:parentActivityName=".ListenerActivity" >
+            android:parentActivityName=".activities.ListenerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.play4u.mobile.ListenerActivity" />
+                android:value=".activities.ListenerActivity" />
         </activity>
         <activity
-            android:name=".LoadingErrorActivity"
+            android:name=".activities.LoadingErrorActivity"
             android:label="@string/title_activity_loading_error" >
         </activity>
     </application>

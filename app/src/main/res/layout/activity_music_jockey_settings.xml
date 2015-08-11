@@ -9,12 +9,12 @@
     android:theme="@android:style/Theme.Holo.Light"
     android:orientation="vertical"
     android:gravity="center_vertical|center_horizontal"
-    tools:context="com.play4u.mobile.activities.ListenerSettingsActivity">
+    tools:context="com.play4u.mobile.activities.MusicJockeySettingsActivity">
 
     <EditText
-        android:id="@+id/first_name"
+        android:id="@+id/stage_name"
         android:layout_marginBottom="10dp"
-        android:hint="First name"
+        android:hint="Stage name"
         android:inputType="text|textCapWords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

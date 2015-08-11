@@ -3,7 +3,7 @@ package com.play4u.mobile.domain;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.play4u.mobile.singletons.EmptyJSONObject;
+import com.play4u.mobile.util.EmptyJSONObject;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
@@ -45,7 +45,7 @@ public class MusicJockey extends User {
     /*
     Setters
      */
-    public User setMusicJockeyStageName(final String stageNameValue){
+    public User setStageName(final String stageNameValue){
         prefs.edit().putString(MUSIC_JOCKEY_STAGE_NAME_KEY, stageNameValue);
         return this;
     }
@@ -53,7 +53,7 @@ public class MusicJockey extends User {
     /*
     Getters
      */
-    public String getMusicJockeyStageName(){
+    public String getStageName(){
         return this.prefs.getString(MUSIC_JOCKEY_STAGE_NAME_KEY, "");
     }
 
@@ -62,7 +62,7 @@ public class MusicJockey extends User {
      */
     public JSONObject toJSON(){
         try {
-            return super.toJSON().put(MUSIC_JOCKEY_STAGE_NAME_KEY, getMusicJockeyStageName());
+            return super.toJSON().put(MUSIC_JOCKEY_STAGE_NAME_KEY, getStageName());
         }
         catch (Exception ex){
             Log.e("MusicJockey", ExceptionUtils.getStackTrace(ex));

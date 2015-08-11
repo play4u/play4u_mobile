@@ -3,7 +3,7 @@ package com.play4u.mobile.domain;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.play4u.mobile.singletons.EmptyJSONObject;
+import com.play4u.mobile.util.EmptyJSONObject;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
