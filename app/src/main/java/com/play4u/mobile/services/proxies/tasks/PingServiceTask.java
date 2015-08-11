@@ -1,11 +1,11 @@
-package com.play4u.mobile.services.adapters.tasks;
+package com.play4u.mobile.services.proxies.tasks;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.play4u.mobile.R;
-import com.play4u.mobile.facades.EmptyJSONObject;
-import com.play4u.mobile.services.adapters.tasks.facades.HttpResponseReader;
+import com.play4u.mobile.services.proxies.tasks.decorators.HttpResponseReader;
+import com.play4u.mobile.singletons.EmptyJSONObject;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.HttpResponse;

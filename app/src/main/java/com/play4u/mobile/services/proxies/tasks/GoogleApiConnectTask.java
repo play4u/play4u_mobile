@@ -1,4 +1,4 @@
-package com.play4u.mobile.services.adapters.tasks;
+package com.play4u.mobile.services.proxies.tasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,7 +7,7 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.play4u.mobile.services.domain.GoogleApiClientSingleton;
+import com.play4u.mobile.services.domain.singletons.GoogleApiClientSingleton;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class GoogleApiConnectTask extends AsyncTask<Void,Void,GoogleApiClient>{
     protected static final String LOG_TAG="GoogleApiConnectTask";
     public static final int GOOGLE_API_CONNECTION_RETRIES=3;
-    public static final short GOOGLE_API_CONNECTION_TIMEOUT=5; // secs
+    public static final short GOOGLE_API_CONNECTION_TIMEOUT=3; // secs
     protected Context ctx;
 
     public GoogleApiConnectTask(final Context ctx){
@@ -46,7 +46,11 @@ public class GoogleApiConnectTask extends AsyncTask<Void,Void,GoogleApiClient>{
                         .singleton(ctx)
                         .blockingConnect(GOOGLE_API_CONNECTION_TIMEOUT, TimeUnit.SECONDS)
                         .getErrorCode();
-                Log.w(LOG_TAG, "Could not connect to Google API services. Error code: " + errorCode + ". Attempt: " + attempt);
+
+                if(errorCode != ConnectionResult.SUCCESS) {
+                    Log.w(LOG_TAG, "Timed out trying to connect to Google API services. Error code: " +
+                            errorCode + ". Attempt: " + attempt);
+                }
             }
 
             if(errorCode != ConnectionResult.SUCCESS){

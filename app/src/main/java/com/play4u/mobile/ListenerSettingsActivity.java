@@ -6,23 +6,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.play4u.mobile.decorators.DirtyEditText;
 import com.play4u.mobile.domain.Listener;
-import com.play4u.mobile.facades.DirtyEditText;
-import com.play4u.mobile.services.adapters.ListenerSettingsUpdateService;
+import com.play4u.mobile.services.proxies.ListenerSettingsCreateService;
+import com.play4u.mobile.services.proxies.ListenerSettingsUpdateService;
 import com.play4u.mobile.strategies.ActivityStrategy;
 import com.play4u.mobile.strategies.ListenerSettingsUpdateStrategy;
 
 public class ListenerSettingsActivity extends Activity {
-    protected ListenerSettingsUpdateService listenerSettings;
+    protected ListenerSettingsUpdateService listenerSettingsUpdateService;
+    protected ListenerSettingsCreateService listenerSettingsCreateService;
     protected DirtyEditText firstNameTextInput;
     protected DirtyEditText emailTextInput;
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.listenerSettingsUpdateService=new ListenerSettingsUpdateService(getApplicationContext(),getListener());
+        this.listenerSettingsCreateService=new ListenerSettingsCreateService(getApplicationContext(),getListener());
         setContentView(R.layout.activity_listener_settings);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
-        this.listenerSettings=new ListenerSettingsUpdateService(getApplicationContext(),getListener());
         firstNameTextInput=new DirtyEditText((EditText)findViewById(R.id.first_name));
         emailTextInput=new DirtyEditText((EditText)findViewById(R.id.email));
     }
@@ -35,8 +38,12 @@ public class ListenerSettingsActivity extends Activity {
         return firstNameTextInput;
     }
 
-    public ListenerSettingsUpdateService getListenerSettings(){
-        return listenerSettings;
+    public ListenerSettingsUpdateService getListenerSettingsUpdateService(){
+        return listenerSettingsUpdateService;
+    }
+
+    public ListenerSettingsCreateService getListenerSettingsCreateService(){
+        return listenerSettingsCreateService;
     }
 
     public Listener getListener(){

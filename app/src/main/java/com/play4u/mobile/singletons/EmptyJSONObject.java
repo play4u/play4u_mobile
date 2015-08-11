@@ -1,4 +1,4 @@
-package com.play4u.mobile.facades;
+package com.play4u.mobile.singletons;
 
 import android.util.Log;
 

@@ -1,4 +1,4 @@
-package com.play4u.mobile.services.adapters.tasks;
+package com.play4u.mobile.services.proxies.tasks;
 
 import android.content.Context;
 import android.net.http.AndroidHttpClient;

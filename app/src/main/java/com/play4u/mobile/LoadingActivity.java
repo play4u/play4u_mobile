@@ -17,11 +17,10 @@ import com.play4u.mobile.domain.Listener;
 import com.play4u.mobile.domain.MusicJockey;
 import com.play4u.mobile.domain.User;
 import com.play4u.mobile.facades.BitMapRescaleFacade;
-import com.play4u.mobile.services.adapters.tasks.GoogleApiConnectTask;
-import com.play4u.mobile.services.domain.GoogleApiClientSingleton;
+import com.play4u.mobile.services.domain.singletons.GoogleApiClientSingleton;
+import com.play4u.mobile.services.proxies.tasks.GoogleApiConnectTask;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 
 public class LoadingActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     protected final String LOG_TAG="LoadingActivity";
@@ -76,25 +75,14 @@ public class LoadingActivity extends Activity implements GoogleApiClient.Connect
                 new BitMapRescaleFacade(getWindowManager(), bitmap).rescaleImage()));
     }
 
-    protected void connectToGoogleApi() throws Exception{
+    protected void connectToGoogleApi() {
         final GoogleApiConnectTask task=new GoogleApiConnectTask(this);
         task.execute();
-        task.get();
     }
 
     public void onResume(){
         super.onResume();
-
-        try {
-            connectToGoogleApi();
-        }
-        catch (Throwable ex){
-            Log.e(LOG_TAG, ExceptionUtils.getStackTrace(ex));
-            final Intent intent = new Intent(this, LoadingErrorActivity.class);
-            intent.putExtra(LoadingErrorActivity.INTENT_EXCEPTION_KEY,ex.getMessage());
-            startActivity(intent);
-            return;
-        }
+        connectToGoogleApi();
 
         if (User.singleton() instanceof Listener){
             Log.i(LOG_TAG, "Detected listener. Switching to listener activity...");

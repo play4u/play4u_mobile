@@ -1,4 +1,4 @@
-package com.play4u.mobile.services.domain;
+package com.play4u.mobile.services.domain.singletons;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,7 +15,7 @@ public class GoogleApiClientSingleton {
     protected static volatile GoogleApiClient helper;
     protected static final String LOG_TAG="GoogleApiClientSingle";
 
-    public static GoogleApiClient singleton(final Context context){
+    protected static void checkContextParam(final Context context){
         if(!(context instanceof GoogleApiClient.ConnectionCallbacks)){
             throw new IllegalArgumentException("Context does not implement Google API connection-callbacks. " +
                     "Type: "+context.getClass().getName());
@@ -24,7 +24,9 @@ public class GoogleApiClientSingleton {
             throw new IllegalArgumentException("Context does not implement Google API on-connection-failed listener. " +
                     "Type: "+context.getClass().getName());
         }
+    }
 
+    public static GoogleApiClient singleton(final Context context){
         GoogleApiClient result = helper;
         if (result == null) {
             synchronized(GoogleApiClientSingleton.class) {
@@ -32,6 +34,7 @@ public class GoogleApiClientSingleton {
 
                 if (result == null) {
                     try {
+                        checkContextParam(context);
                         helper = result = new GoogleApiClient.Builder(context)
                                 .addConnectionCallbacks((GoogleApiClient.ConnectionCallbacks)context)
                                 .addOnConnectionFailedListener((GoogleApiClient.OnConnectionFailedListener) context)

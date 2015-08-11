@@ -1,4 +1,4 @@
-package com.play4u.mobile.services.adapters.tasks.facades;
+package com.play4u.mobile.services.proxies.tasks.decorators;
 
 import org.apache.http.HttpResponse;
 

@@ -3,7 +3,7 @@ package com.play4u.mobile.domain;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.play4u.mobile.facades.EmptyJSONObject;
+import com.play4u.mobile.singletons.EmptyJSONObject;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
@@ -12,7 +12,6 @@ import org.json.JSONObject;
  * Created by ykeyser on 8/6/15.
  */
 public class Listener extends User{
-    protected SharedPreferences prefs;
     public static final String FIRST_NAME="fname";
     protected final String LISTENER_FIRST_NAME_KEY="listener.first_name";
     public static final String USER_TYPE_VALUE="Listener";

@@ -3,7 +3,8 @@ package com.play4u.mobile.domain;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.play4u.mobile.facades.EmptyJSONObject;
+import com.play4u.mobile.decorators.DisplayableSharedPreferences;
+import com.play4u.mobile.singletons.EmptyJSONObject;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
@@ -14,6 +15,7 @@ import org.json.JSONObject;
  */
 public class User {
     protected SharedPreferences prefs;
+    protected final String USER_ID_KEY="user.id";
     protected final String EMAIL_KEY="user_email";
     protected final String LONG="longitude";
     protected final String LAT="latitude";
@@ -53,6 +55,13 @@ public class User {
 
 
     protected User(final SharedPreferences prefs) {
+        if(prefs == null){
+            throw new IllegalArgumentException("Shared preferences is blank");
+        }else{
+            final String prefsStr=new DisplayableSharedPreferences(prefs).toString();
+            Log.i(LOG_TAG,"Prefs: "+prefsStr);
+        }
+
         this.prefs = prefs;
     }
 
@@ -64,7 +73,7 @@ public class User {
                     .put(LAT,getLatitude());
         }
         catch (Exception ex){
-            Log.e("User", ExceptionUtils.getStackTrace(ex));
+            Log.e(LOG_TAG, ExceptionUtils.getStackTrace(ex));
             return EmptyJSONObject.singleton();
         }
     }
@@ -92,10 +101,15 @@ public class User {
         return this;
     }
 
+    public User setUserId(final Integer userId){
+        prefs.edit().putInt(USER_ID_KEY,userId);
+        return this;
+    }
 
     /*
     Getters
      */
+    public Integer getUserId(){return this.prefs.getInt(USER_ID_KEY,-1);}
 
     public String getEmail(){
         return this.prefs.getString(EMAIL_KEY,"");

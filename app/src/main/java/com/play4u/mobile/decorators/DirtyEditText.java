@@ -1,4 +1,4 @@
-package com.play4u.mobile.facades;
+package com.play4u.mobile.decorators;
 
 import android.text.Editable;
 import android.text.TextWatcher;
