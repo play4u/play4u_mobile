@@ -84,6 +84,7 @@ public abstract class UserSettingsService {
             task.execute(nameValuePairsArray);
             shouldSend=false;
             httpParams.clear();
+            //TODO: optimize in a thread
             final JSONObject respJSON=task.get();
             task.close();
             return respJSON;

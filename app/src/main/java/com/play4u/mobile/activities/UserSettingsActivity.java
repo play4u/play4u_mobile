@@ -18,11 +18,13 @@ public abstract class UserSettingsActivity extends Activity {
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listener_settings);
+        initializeLayout();
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
         emailTextInput=new DirtyEditText((EditText)findViewById(R.id.email));
     }
+
+    protected abstract void initializeLayout();
 
     public DirtyEditText getEmailTextInput(){
         return emailTextInput;

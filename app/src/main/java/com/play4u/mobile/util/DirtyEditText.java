@@ -16,6 +16,10 @@ public class DirtyEditText {
     protected String textBefore="", textAfter="";
 
     public DirtyEditText(final EditText editText){
+        if(editText==null){
+            throw new IllegalArgumentException("Edit text is blank");
+        }
+
         this.editText=editText;
 
         this.editText.addTextChangedListener(new TextWatcher() {

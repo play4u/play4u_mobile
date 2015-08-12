@@ -19,6 +19,10 @@ public class ListenerSettingsActivity extends UserSettingsActivity {
         firstNameTextInput=new DirtyEditText((EditText)findViewById(R.id.first_name));
     }
 
+    protected void initializeLayout(){
+        setContentView(R.layout.activity_listener_settings);
+    }
+
     public DirtyEditText getFirstNameTextInput(){
         return firstNameTextInput;
     }

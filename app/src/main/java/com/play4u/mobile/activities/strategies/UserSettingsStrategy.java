@@ -1,11 +1,9 @@
 package com.play4u.mobile.activities.strategies;
 
-import android.content.Intent;
 import android.location.Location;
 import android.util.Log;
 
 import com.google.android.gms.location.LocationServices;
-import com.play4u.mobile.activities.ListenerActivity;
 import com.play4u.mobile.activities.UserSettingsActivity;
 import com.play4u.mobile.services.UserSettingsService;
 import com.play4u.mobile.services.exceptions.ServiceCommitException;
@@ -18,13 +16,10 @@ import org.json.JSONObject;
 /**
  * Created by ykeyser on 8/10/15.
  */
-public class UserSettingsStrategy {
-
+public abstract class UserSettingsStrategy {
     protected static final String LOG_TAG="ListenerSettings";
-
     protected UserSettingsActivity activity;
     protected UserSettingsService service;
-
 
     public UserSettingsActivity getActivity(){
         return activity;
@@ -38,11 +33,11 @@ public class UserSettingsStrategy {
         return service;
     }
 
-    public UserSettingsStrategy(final UserSettingsActivity activity){
+    protected UserSettingsStrategy(final UserSettingsActivity activity){
         this.activity=activity;
     }
 
-    public void handleServiceResponse(final JSONObject jsonObj){
+    protected void handleServiceResponse(final JSONObject jsonObj){
         return;
     }
 
@@ -57,10 +52,7 @@ public class UserSettingsStrategy {
         transitionToNextActivity();
     }
 
-    protected void transitionToNextActivity(){
-        final Intent intent = new Intent(getActivity(), ListenerActivity.class);
-        getActivity().startActivity(intent);
-    }
+    protected abstract void transitionToNextActivity();
 
     protected JSONObject send(){
         try {

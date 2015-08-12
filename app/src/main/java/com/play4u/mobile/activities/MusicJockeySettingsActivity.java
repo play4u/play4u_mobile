@@ -14,10 +14,18 @@ import com.play4u.mobile.util.DirtyEditText;
 public class MusicJockeySettingsActivity extends UserSettingsActivity {
     protected DirtyEditText stageNameTextInput;
 
-
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(findViewById(R.id.stage_name)==null){
+            throw new NullPointerException("Stage-name edit-text is null. Id: "+R.id.stage_name);
+        }
+
         stageNameTextInput=new DirtyEditText((EditText)findViewById(R.id.stage_name));
+    }
+
+    protected void initializeLayout(){
+        setContentView(R.layout.activity_music_jockey_settings);
     }
 
     public DirtyEditText getStageNameTextInput(){
