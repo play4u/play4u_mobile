@@ -1,4 +1,4 @@
-package com.play4u.mobile.util;
+package com.play4u.mobile.services.singletons;
 
 import android.content.Context;
 import android.util.Log;

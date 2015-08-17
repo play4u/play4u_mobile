@@ -7,8 +7,8 @@ import com.google.android.gms.location.LocationServices;
 import com.play4u.mobile.activities.UserSettingsActivity;
 import com.play4u.mobile.services.UserSettingsService;
 import com.play4u.mobile.services.exceptions.ServiceCommitException;
+import com.play4u.mobile.services.singletons.GoogleApiClientSingleton;
 import com.play4u.mobile.util.EmptyJSONObject;
-import com.play4u.mobile.util.GoogleApiClientSingleton;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;

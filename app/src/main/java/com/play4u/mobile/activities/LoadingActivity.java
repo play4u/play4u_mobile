@@ -17,9 +17,9 @@ import com.play4u.mobile.R;
 import com.play4u.mobile.domain.Listener;
 import com.play4u.mobile.domain.MusicJockey;
 import com.play4u.mobile.domain.User;
+import com.play4u.mobile.services.singletons.GoogleApiClientSingleton;
 import com.play4u.mobile.services.tasks.GoogleApiConnectTask;
 import com.play4u.mobile.util.BitMapRescaleFacade;
-import com.play4u.mobile.util.GoogleApiClientSingleton;
 
 import org.apache.commons.lang3.StringUtils;
 
