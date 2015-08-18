@@ -13,6 +13,7 @@ import java.util.Map;
 public class SpotifySearchService {
     public static final String LIMIT_PARAM="limit";
     public static final String MARKET_PARAM="market";
+    public static final String GENRE_PARAM="genre";
     protected TrackFoundObserver trackFoundObserver;
     protected static final String LOG_TAG="SpotifySearchService";
     protected final Map<String, Object> queryParams=new HashMap<String, Object>();
