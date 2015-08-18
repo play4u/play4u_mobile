@@ -11,6 +11,8 @@ import java.util.Map;
  * Created by ykeyser on 8/17/15.
  */
 public class SpotifySearchService {
+    public static final String LIMIT_PARAM="limit";
+    public static final String MARKET_PARAM="market";
     protected TrackFoundObserver trackFoundObserver;
     protected static final String LOG_TAG="SpotifySearchService";
     protected final Map<String, Object> queryParams=new HashMap<String, Object>();
