@@ -3,6 +3,9 @@ package com.play4u.mobile.services.spotify;
 import com.play4u.mobile.services.singletons.SpotifyApiClientSingleton;
 import com.play4u.mobile.services.spotify.builders.TrackSearchQuery;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Adapter for Spotify service
  * Created by ykeyser on 8/17/15.
@@ -10,6 +13,16 @@ import com.play4u.mobile.services.spotify.builders.TrackSearchQuery;
 public class SpotifySearchService {
     protected TrackFoundObserver trackFoundObserver;
     protected static final String LOG_TAG="SpotifySearchService";
+    protected final Map<String, Object> queryParams=new HashMap<String, Object>();
+
+    public SpotifySearchService setQueryParam(final String name, final String value){
+        queryParams.put(name,value);
+        return this;
+    }
+
+    public String getQueryParam(final String name){
+        return queryParams.get(name).toString();
+    }
 
     public SpotifySearchService setTrackFoundObserver(final TrackFoundObserver observer){
         this.trackFoundObserver=observer;
@@ -26,7 +39,7 @@ public class SpotifySearchService {
             throw new IllegalArgumentException("Track-search query is empty");
         }
 
-        SpotifyApiClientSingleton.singleton().searchTracks(query.build(), trackFoundObserver);
+        SpotifyApiClientSingleton.singleton().searchTracks(query.build(), queryParams, trackFoundObserver);
         return this;
     }
 }
